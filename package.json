@@ -1,0 +1,34 @@
+{
+  "name": "projeto15-yes_repeat-back",
+  "version": "1.0.0",
+  "description": "Este é o back-end de um projeto Full Stack em dupla, para treinar habilidades como trabalho em equipe. Um projeto com requisitos abertos, onde devemos criar um e-commerce com funcionalidades de: login; cadastro; listagem de produtos; carrinho e checkout. Decidimos criar o site do - Yes, repeat! - um brechó online no instagram.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matheussvini/projeto15-yes_repeat-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matheussvini/projeto15-yes_repeat-back/issues"
+  },
+  "homepage": "https://github.com/Matheussvini/projeto15-yes_repeat-back#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "joi": "^17.7.0",
+    "mongodb": "^4.12.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
