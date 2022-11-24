@@ -1,9 +1,18 @@
 import joi from "joi";
 
 export const signUpSchema = joi.object({
-  // validação do cadastro
+  name: joi.string().min(3).required(),
+  email: joi.string().email().required(),
+  password: joi.string().min(6).pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).required(),
+  cep: joi.string().pattern(new RegExp( /^[0-9]{5}-[0-9]{3}$/)).required(),
+  street: joi.string().min(3).required(),
+  number: joi.number().min(1).max(9999).required(),
+  complement: joi.string().min(3),
+  district: joi.string().min(3).required(),
+  city: joi.string().min(3).required()
 });
 
 export const signInSchema = joi.object({
-  // validação do login
+  email: joi.string().email().required(),
+  password: joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
 });
