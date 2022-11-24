@@ -13,7 +13,7 @@ export async function signUpParticipants(req, res) {
   }
 
   try {
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     const userExists = await usersCollection.findOne({ email });
     if (userExists) {
