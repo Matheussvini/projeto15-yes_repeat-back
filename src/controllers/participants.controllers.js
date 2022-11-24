@@ -2,6 +2,8 @@ import { signInSchema, signUpSchema } from "../model/users.model.js";
 import { usersCollection } from "../database/db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export async function signUpParticipants(req, res) {
   const { error } = signUpSchema.validate(req.body, { abortEarly: false });
@@ -36,7 +38,7 @@ export async function signInParticipants(req, res) {
     const arrErrors = error.details.map((e) => e.message);
     return res.status(422).send(arrErrors);
   }
-
+  
   try {
     const { email, password } = req.body;
     const user = await usersCollection.findOne({ email });
