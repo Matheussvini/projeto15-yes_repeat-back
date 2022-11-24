@@ -8,9 +8,10 @@ export const signUpSchema = joi.object({
     cep: joi.string().pattern(new RegExp(/^[0-9]{5}-[0-9]{3}$/)).required(),
     street: joi.string().min(3).required(),
     number: joi.number().min(1).max(9999).required(),
-    complement: joi.string().min(3),
+    complement: joi.string(),
     district: joi.string().min(3).required(),
     city: joi.string().min(3).required(),
+    uf: joi.string().min(2).max(2).required()
   },
 });
 
