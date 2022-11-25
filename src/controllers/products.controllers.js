@@ -32,8 +32,12 @@ export async function putProducts(req, res) {
 }
 
 export async function deleteProducts(req, res) {
-  // apagar produto do banco
+  const id = req.params.id;
 
-  
-
+  try {
+    await productsCollection.deleteOne({ _id: new ObjectId(id) });
+    res.status(200).send("Produto excluído com sucesso!");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 }
