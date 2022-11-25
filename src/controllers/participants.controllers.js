@@ -6,10 +6,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export async function signUpParticipants(req, res) {
-  const { error } = signUpSchema.validate(req.body, { abortEarly: false });
+  const { error } = signUpSchema.validate(req.body);
   if (error) {
-    const arrErrors = error.details.map((e) => e.message);
-    return res.status(422).send(arrErrors);
+    return res.status(422).send(error.message);
   }
 
   try {
