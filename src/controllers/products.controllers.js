@@ -6,7 +6,7 @@ export async function postProducts(req, res) {
   try {
     await productsCollection.insertOne(product);
     res.status(201).send({ message: "Produto cadastrado com sucesso!" });
-  } catch (error) {
+  } catch (err) {
     res.status(500).send(err.message);
   }
 }
@@ -20,9 +20,20 @@ export async function getProductById(req, res) {
 }
 
 export async function putProducts(req, res) {
-  // editar produto no banco
+  const product = req.body;
+  const productId = res.params.id;
+
+  try {
+    await productsCollection.updateOne({ _id: productId }, { $set: product });
+    res.status(201).send({ message: "Produto editado com sucesso!" });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 }
 
 export async function deleteProducts(req, res) {
   // apagar produto do banco
+
+  
+
 }
