@@ -6,10 +6,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export async function signUpParticipants(req, res) {
-  const { error } = signUpSchema.validate(req.body, { abortEarly: false });
+  const { error } = signUpSchema.validate(req.body);
   if (error) {
-    const arrErrors = error.details.map((e) => e.message);
-    return res.status(422).send(arrErrors);
+    return res.status(422).send(error.message);
   }
 
   try {
@@ -38,26 +37,32 @@ export async function signInParticipants(req, res) {
     const arrErrors = error.details.map((e) => e.message);
     return res.status(422).send(arrErrors);
   }
-  
+
   try {
     const { email, password } = req.body;
     const user = await usersCollection.findOne({ email });
     if (!user) {
       return res.status(401).send({
         message:
-          "Email não cadastrado, por favor verifique o email ou cadastre-se.",
+        "Email não cadastrado, por favor verifique o email ou cadastre-se.",
       });
     }
-
+    
     if (bcrypt.compareSync(password, user.password)) {
       const data = { userId: user._id };
       const secretKey = process.env.JWT_SECRET;
       const configs = { expiresIn: 60 * 60 * 24 * 30 };
 
-      const token = jwt.sign(data, secretKey, configs);
+      const token = jwt.sign({}, secretKey, configs);
 
       delete user.password;
-      res.status(200).send({ ...user, token });
+      const adminEmail = process.env.EMAIL_ADMIN;
+
+      if (user.email === adminEmail) {
+        res.status(200).send({ ...user, token, admin: true });
+      } else {
+        res.status(200).send({ ...user, token, admmin: false });
+      }
     } else {
       res.status(401).send({
         message: "Senha incorreta, verifique sua senha e tente novamente.",
