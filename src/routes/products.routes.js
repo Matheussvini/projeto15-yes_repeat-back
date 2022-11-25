@@ -3,16 +3,19 @@ import {
   getProducts,
   postProducts,
   putProducts,
-  deleteProducts
+  deleteProducts,
+  getProductById
 } from "../controllers/products.controllers.js";
 import { authValidation } from "../middlewares/authValidation.middleware.js";
-import { productsValidation } from "../middlewares/productsValidation.middleware.js";
+import { productsValidation } from '../middlewares/productsValidation.middleware.js'
 
 const router = Router();
 
-router.use(authValidation);
-
 router.get("/produtos", getProducts);
+
+router.get("/produtos/:id", getProductById);
+
+router.use(authValidation);
 
 router.delete("/produtos/:id", deleteProducts);
 
