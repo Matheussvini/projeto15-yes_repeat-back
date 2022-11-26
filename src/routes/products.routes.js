@@ -22,10 +22,10 @@ router.use(adminValidation);
 
 router.use(productsValidation);
 
-router.post("/produtos", postProducts);
+router.post("/admin/produtos", postProducts);
 
-router.put("/produtos/:id",idProductExists, putProducts);
+router.put("/admin/produtos/:id",idProductExists, putProducts);
 
-router.delete("/produtos/:id", idProductExists, deleteProducts);
+router.delete("/admin/produtos/:id", idProductExists, deleteProducts);
 
 export default router;

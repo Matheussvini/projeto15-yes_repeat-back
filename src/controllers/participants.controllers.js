@@ -53,7 +53,7 @@ export async function signInParticipants(req, res) {
       const secretKey = process.env.JWT_SECRET;
       const configs = { expiresIn: 60 * 60 * 24 * 30 };
 
-      const token = jwt.sign({}, secretKey, configs);
+      const token = jwt.sign(data, secretKey, configs);
 
       delete user.password;
       const adminEmail = process.env.EMAIL_ADMIN;
