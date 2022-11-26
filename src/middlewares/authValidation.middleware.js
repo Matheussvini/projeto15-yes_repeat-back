@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { usersCollection } from "../database/db.js";
 import dotenv from "dotenv";
+import { ObjectId } from "mongodb";
 dotenv.config();
 
 export async function authValidation(req, res, next) {
@@ -18,7 +19,7 @@ export async function authValidation(req, res, next) {
   try {
     const data = jwt.verify(token, secretKey);
 
-    const user = await usersCollection.findOne({ _id: data?.userId });
+    const user = await usersCollection.findOne({ _id: new ObjectId( data?.userId) });
 
     if (!user) {
       return res
