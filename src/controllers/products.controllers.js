@@ -13,6 +13,9 @@ export async function postProducts(req, res) {
 
 export async function getProducts(req, res) {
   // buscar produtos no banco
+  const arr = await productsCollection.findOne({name: "aaaa"})
+  console.log("fui requisitada")
+  return res.status(200).send(arr);
 }
 
 export async function getProductById(req, res) {
