@@ -19,7 +19,9 @@ export async function authValidation(req, res, next) {
   try {
     const data = jwt.verify(token, secretKey);
 
-    const user = await usersCollection.findOne({ _id: new ObjectId( data?.userId) });
+    const user = await usersCollection.findOne({
+      _id: new ObjectId(data?.userId),
+    });
 
     if (!user) {
       return res
